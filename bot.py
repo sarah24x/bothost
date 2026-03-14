@@ -1,24 +1,13 @@
-keyboard = {
-    "inline_keyboard": [
-        [
-            {"text": "➕ New Account", "callback_data": "new_account"},
-            {"text": "💼 My accounts", "callback_data": "my_accounts"}
-        ],
-        [
-            {"text": "💰 Balance", "callback_data": "balance"},
-            {"text": "👥 My referrals", "callback_data": "referrals"}
-        ],
-        [
-            {"text": "🏆 Rank", "callback_data": "rank"},
-            {"text": "❓ Help", "callback_data": "help"}
-        ],
-        [
-            {"text": "🎲 DICE Game", "callback_data": "dice_game"}
-        ]
-    ]
-}
+import telebot
+import os
 
-bot.sendMessage(
-    "Choose an option:",
-    reply_markup=keyboard
-)
+TOKEN = os.getenv("BOT_TOKEN")
+
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.reply_to(message, "Bot is running on Railway!")
+
+print("Bot Started")
+bot.infinity_polling()
